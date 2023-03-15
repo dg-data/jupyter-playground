@@ -1,7 +1,6 @@
 # JupyterLab Plugin Playground
 
-[![Github Actions Status](https://github.com/jupyterlab/jupyterlab-plugin-playground/workflows/Build/badge.svg)](https://github.com/jupyterlab/jupyterlab-plugin-playground/actions/workflows/build.yml)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-plugin-playground/main?urlpath=lab)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dg-data/jupyter-playground/main?urlpath=lab)
 [![JupyterLite](https://jupyterlite.rtfd.io/en/latest/_static/badge-launch.svg)](https://jupyterlab-plugin-playground.readthedocs.io/en/latest/lite/lab)
 
 A JupyterLab extension to write and load simple JupyterLab plugins inside JupyterLab.
@@ -17,7 +16,6 @@ pip install jupyterlab-plugin-playground
 ## How to use the Plugin Playground
 
 This extension provides a new command, `Load Current File As Extension`, available in the text editor.
-
 As an example, open the text editor by creating a new text file and paste this small JupyterLab plugin into it. This plugin will create a simple command `My Super Cool Toggle` in the command palette that can be toggled on and off.
 
 ```typescript
@@ -53,7 +51,6 @@ export default plugin;
 ```
 
 While in the text editor, load this plugin in JupyterLab by invoking the Command Palette and executing `Load Current File As Extension`. Invoke the Command Palette again and you will see a new command "My Super Cool Toggle". Executing this new command will toggle the checkbox next to the command.
-
 As another more advanced example, we load the [bqplot](https://bqplot.readthedocs.io) Jupyter Widget library from the cloud using RequireJS. This assumes you have the [ipywidgets JupyterLab extension](https://ipywidgets.readthedocs.io/en/stable/user_install.html#installing-in-jupyterlab-3-0) installed.
 
 ```typescript
@@ -87,21 +84,6 @@ There are a few differences in how to write plugins in the Plugin Playground com
   - In addition to JupyterLab and Lumino packages, only AMD modules can be imported; ES6 modules and modules compiled for consumption by Webpack/Node will not work in the current version and an attempt to load such modules will result in `Uncaught SyntaxError: Unexpected token 'export'` error.
 - While the playground will attempt to import relative files (with `.ts` suffix), SVG (as strings), and to load `plugin.json` schema, these are experimental features for rapid prototyping and details are subject to change; other resources like CSS styles are not yet supported (but the support is planned)
 
-### Migrating from version 0.3.0
-
-Version 0.3.0 supported only object-based plugins and `require.js` based imports.
-While the object-based syntax for defining plugins remains supported, using `require` global reference is now deprecated.
-
-A future version will remove `require` object to prevent confusion between `require` from `require.js`, and native `require` syntax;
-please use `requirejs` (an alias function with the same signature) instead, or migrate to ES6-syntax plugins.
-Require.js is not available in the ES6-syntax based plugins.
-
-To migrate to the ES6-compatible syntax:
-
-- assign the plugin object to a variable, e.g. `const plugin = { /* plugin code without changes */ };`,
-- add `export default plugin;` line,
-- convert `require()` calls to ES6 default imports.
-
 ## Advanced Settings
 
 The Advanced Settings for the Plugin Playground enable you to configure plugins to load every time JupyterLab starts up. Automatically loaded plugins can be configured in two ways:
@@ -121,8 +103,6 @@ The Advanced Settings for the Plugin Playground enable you to configure plugins 
     ]
   }
   ```
-
-## Contributing
 
 ### Development install
 
@@ -149,7 +129,6 @@ jupyter lab
 ```
 
 With the watch command running, every saved change will immediately be built locally and available in your running JupyterLab. Refresh JupyterLab to load the change in your browser (you may need to wait several seconds for the extension to be rebuilt).
-
 By default, the `jlpm run build` command generates the source maps for this extension to make it easier to debug using the browser dev tools. To also generate source maps for the JupyterLab core extensions, you can run the following command:
 
 ```bash
