@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """ perform a development install of @jupyterlab/plugin-playground
 
-    On Binder, this will run _after_ the environment has been fully created from
-    the environment.yml in this directory.
-
     This script should also run locally on Linux/MacOS/Windows:
 
         python3 binder/postBuild
@@ -13,12 +10,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 ROOT = Path.cwd()
 
 def _(*args, **kwargs):
     """ Run a command, echoing the args
-
         fails hard if something goes wrong
     """
     print("\n\t", " ".join(args), "\n")
@@ -52,8 +47,7 @@ SETTINGS = Path(sys.prefix) / "share/jupyter/lab/settings"
 SETTINGS.mkdir(parents=True, exist_ok=True)
 shutil.copy2("binder/overrides.json", SETTINGS / "overrides.json")
 
-# download examples
-_("git", "clone", "https://github.com/jupyterlab/extension-examples.git")
+# download examples can be done with nbgitpuller
+# _("git", "clone", "https://github.com/jupyterlab/extension-examples.git")
 
-print("JupyterLab with @jupyterlab/plugin-playground is ready to run with:\n")
-print("\tjupyter lab\n")
+print("JupyterLab with @jupyterlab/plugin-playground is ready to run")
